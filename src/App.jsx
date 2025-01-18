@@ -16,7 +16,6 @@ import {
 function App() {
 
   const [ dummyBaskets, setDummyBaskets ] = useState(["abc", "def"]);
-  // const [ currentBasket, setCurrentBasket ] = useState('basketName');
 
   // useEffect to grab all baskets so we can map through collection and display
 
