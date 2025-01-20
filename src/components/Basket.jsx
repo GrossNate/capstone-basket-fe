@@ -4,21 +4,21 @@ import basketService from '../services';
 
 const Basket = () => {
   const [basketRequests, setBasketRequests] = useState();
-  const { basketName } = useParams();
+  const { basket_address } = useParams();
 
   useEffect(() => {
-    basketService.getBasketContents(basketName)
+    basketService.getBasketContents(basket_address)
       .then((basketData) => {
         setBasketRequests(basketData);
       })
       .catch((error) => console.error(error));
-  }, [basketName]);
+  }, [basket_address]);
 
-  if (!basketName) return null;
+  if (!basket_address) return null;
 
   return (
     <>
-      This is a basket and its name is {basketName}.
+      This is a basket and its name is {basket_address}.
       <h2>All Requests:</h2>
       {basketRequests}
     </>
