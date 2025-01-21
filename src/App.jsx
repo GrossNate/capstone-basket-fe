@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import './App.css';
 import ReactDOM from 'react-dom/client';
 import Basket from './components/Basket';
 import Home from './components/Home';
