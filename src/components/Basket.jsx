@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import basketService from '../services';
+import Request from './Request';
 
 const Basket = () => {
-  const [basketRequests, setBasketRequests] = useState();
+  const [basketRequests, setBasketRequests] = useState([]);
   const { basket_address } = useParams();
 
   useEffect(() => {
@@ -14,13 +15,17 @@ const Basket = () => {
       .catch((error) => console.error(error));
   }, [basket_address]);
 
-  if (!basket_address) return null;
-
   return (
     <>
       This is a basket and its name is {basket_address}.
       <h2>All Requests:</h2>
-      {basketRequests}
+      <ol>
+      {basketRequests.map((request) => (
+        <li key={request.timestamp}>
+          <Request request={request}/>
+        </li>
+        ))}
+      </ol>
     </>
   );
 } 
