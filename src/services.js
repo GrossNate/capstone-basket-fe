@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// const BASE_URL = 'https://tamerjohn.work';
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'https://tamerjohn.work';
+// const BASE_URL = 'http://localhost:3000';
 
 async function getUserBaskets() {
   const response = await axios.get(`${BASE_URL}/all`);
