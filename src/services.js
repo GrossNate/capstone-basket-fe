@@ -13,7 +13,13 @@ async function getBasketContents(basket_address) {
   return response.data;
 }
 
+async function deleteBasket(basket_address) {
+  const response = await axios.delete(`${BASE_URL}/${basket_address}/web`);
+  return response.status;
+}
+
 export default {
   getBasketContents,
   getUserBaskets,
+  deleteBasket
 };
