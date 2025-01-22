@@ -14,34 +14,44 @@ const Request = ({ request }) => {
     );
   }
 
+  const body = (body) => {
+    if (!body) return null;
+    
+    return (
+      <>
+        <br />
+        <details className="collapse bg-base-100 collapse-arrow">
+          <summary className="collapse-title text-xl font-medium">Body</summary>
+          <div className="collapse-content">
+            {request.body}
+          </div>
+        </details>      
+      </>
+    );
+  }
+
   return (
-    <details className="collapse bg-base-200">
+    <details className="collapse bg-base-200 collapse-arrow py-4">
       <summary className="collapse-title text-xl font-medium">
         Method/Path/Params: {request.method} {request.path} {request.query_params}
         <br />
         Timestamp: {request.timestamp}
       </summary>
       <div className="collapse-content">
-        <div className="headers overflow-x-auto">
-          <table className="table table-zebra table-xs">
-            <tbody>
-              {renderHeaders(request.headers)}
-            </tbody>
-          </table>
-        </div>
-        <div className="timestamp">
-          {request.timestamp}       
-        </div>
-        <div className="method">
-        {request.method} 
-        </div>
-        <div className="query-params">
-          {request.query_params}
-        </div>
-        <div className="body">
-          {request.body}
-        </div>
+      <div className="headers overflow-x-auto">
+          <details className="collapse bg-base-100 collapse-arrow">
+            <summary className="collapse-title text-xl font-medium">Headers</summary>
+            <div className="collapse-content">
+              <table className="table table-zebra table-xs">
+                <tbody>
+                  {renderHeaders(request.headers)}
+                </tbody>
+              </table>
+            </div>
+          </details>
+          {body(request.body)}
       </div>
+     </div>
     </details>
   );
 }

@@ -16,17 +16,16 @@ const Basket = () => {
   }, [basket_address]);
 
   return (
-    <>
-      This is a basket and its name is {basket_address}.
-      <h2>All Requests:</h2>
+    <div className='prose p-5'>
+      <h1>{basket_address}</h1>
       <ol>
-      {basketRequests.map((request) => (
-        <li key={request.timestamp}>
-          <Request request={request}/>
-        </li>
+        {basketRequests.map((request) => (
+          <li key={request.timestamp} className="py-4 flex">
+            <Request request={request}/>
+          </li>
         ))}
       </ol>
-    </>
+    </div>
   );
 } 
 
