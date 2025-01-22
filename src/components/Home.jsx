@@ -45,22 +45,15 @@ const allBaskets = (baskets, setBaskets) => {
   ));
 }
 
-const Home = ({ baskets, setBaskets }) => {
-  const createBasket = (event) => {
+const Home = ({ baskets, setBaskets, createBasket }) => {
+  const handleCreateBasket = (event) => {
     event.preventDefault();
-    basketService.addBasket()
-      .then((basket) => {
-          setBaskets([...baskets, basket]);
-          alert(`Basket created! Address: ${basket.address}`);
-      })
-      .catch((error) => {
-        console.error(error.message);
-      });
+    createBasket();
   }
 
   return (
     <>
-      <button onClick={createBasket}>create basket</button>
+      <button onClick={handleCreateBasket}>create basket</button>
       <h2>Baskets</h2>
       <ul>
         {allBaskets(baskets, setBaskets)}

@@ -41,6 +41,17 @@ function App() {
     details.removeAttribute('open');
   }
 
+  const createBasket = () => {
+    basketService.addBasket()
+      .then((basket) => {
+          setBaskets([...baskets, basket]);
+          alert(`Basket created! Address: ${basket.basket_address}`);
+      })
+      .catch((error) => {
+        console.error(error.message);
+    });
+  }
+
   return (
     <>
       <div className="navbar bg-base-100">
@@ -64,7 +75,9 @@ function App() {
 
       <Routes>
         <Route path="/basket/view/:basket_address" element={<Basket />} />
-        <Route path="/" element={<Home baskets={baskets} setBaskets={setBaskets}/>} />
+        <Route path="/" element={
+          <Home baskets={baskets} setBaskets={setBaskets} createBasket={createBasket}/>
+        }/>
       </Routes>
     </>
   )
