@@ -15,19 +15,19 @@ import {
 
 function App() {
 
-  const [ dummyBaskets, setDummyBaskets ] = useState([]);
+  const [ baskets, setBaskets ] = useState([]);
 
   useEffect(() => {
     basketService.getUserBaskets()
       .then((response) => {
-        setDummyBaskets(response);
+        setBaskets(response);
       })
       .catch((error) => console.error(error));
   }, []);
 
-  const allBaskets = (dummyFooBaskets) => {
-    console.log(dummyFooBaskets);
-    return dummyFooBaskets.map(({basket_address}) => (
+  const allBaskets = (baskets) => {
+    console.log(baskets);
+    return baskets.map(({basket_address}) => (
       <li key={basket_address} onClick={closeBasketMenu}>
         <Link to={`/basket/view/${basket_address}`}>
           basket {basket_address}
@@ -54,7 +54,7 @@ function App() {
               <details id="basketMenuDetails">
                 <summary>Baskets</summary>
                 <ul className="bg-base-100 rounded-t-none p-2">
-                  {allBaskets(dummyBaskets)}
+                  {allBaskets(baskets)}
                 </ul>
               </details>
             </li>
@@ -64,7 +64,7 @@ function App() {
 
       <Routes>
         <Route path="/basket/view/:basket_address" element={<Basket />} />
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home baskets={baskets} setBaskets={setBaskets}/>} />
       </Routes>
     </>
   )
