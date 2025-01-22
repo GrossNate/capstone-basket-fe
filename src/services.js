@@ -1,7 +1,15 @@
 import axios from 'axios';
 
 const BASE_URL = 'https://tamerjohn.work';
-// const BASE_URL = 'http://localhost:3000';
+
+async function addBasket() {
+  const response = await axios.post(`${BASE_URL}/new`);
+  if (response.status === 201) {
+    return response.data;
+  } else {
+    throw new Error(`Failed to create basket. Status: ${response.status}`);
+  }
+}
 
 async function getUserBaskets() {
   const response = await axios.get(`${BASE_URL}/all`);
@@ -19,6 +27,7 @@ async function deleteBasket(basket_address) {
 }
 
 export default {
+  addBasket,
   getBasketContents,
   getUserBaskets,
   deleteBasket
