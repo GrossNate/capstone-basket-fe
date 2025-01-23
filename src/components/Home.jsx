@@ -45,14 +45,21 @@ const allBaskets = (baskets, setBaskets) => {
   ));
 }
 
-const Home = ({ baskets, setBaskets }) => (
-  <>
-    <button>create basket</button>
-    <h2>Baskets</h2>
-    <ul>
-      {allBaskets(baskets, setBaskets)}
-    </ul>
-  </>
-);
+const Home = ({ baskets, setBaskets, createBasket }) => {
+  const handleCreateBasket = (event) => {
+    event.preventDefault();
+    createBasket();
+  }
+
+  return (
+    <>
+      <button onClick={handleCreateBasket}>create basket</button>
+      <h2>Baskets</h2>
+      <ul>
+        {allBaskets(baskets, setBaskets)}
+      </ul>
+    </>
+  );
+}
 
 export default Home;
