@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom/client';
 import Basket from './components/Basket';
 import Home from './components/Home';
 import basketService from './services';
@@ -8,9 +7,6 @@ import {
 	Routes,
 	Route,
 	Link,
-	Navigate,
-	useParams,
-	useNavigate,
 } from "react-router-dom";
 
 function App() {
@@ -26,7 +22,6 @@ function App() {
   }, []);
 
   const allBaskets = (baskets) => {
-    console.log(baskets);
     return baskets.map(({basket_address}) => (
       <li key={basket_address} onClick={closeBasketMenu}>
         <Link to={`/basket/view/${basket_address}`}>

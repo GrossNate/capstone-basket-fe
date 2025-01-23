@@ -1,6 +1,6 @@
 const Request = ({ request }) => {
 
-  const renderHeaders = (headers) => { // will make prettier soon
+  const renderHeaders = (headers) => {
     headers = JSON.parse(headers);
     const kvp = Object.entries(headers);
 
