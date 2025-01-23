@@ -21,44 +21,53 @@ const allBaskets = (baskets, setBaskets) => {
   };
   
   return baskets.map(({ basket_address }) => (
-    <li key={basket_address}>
+    <tr key={basket_address}>
+      <td>
       <Link to={`/basket/view/${basket_address}`}>
-        basket {basket_address}
+        <span className="">{basket_address}</span>
       </Link>
-      <button
-        className="btn btn-circle btn-warning"
-        onClick={handleDeleteBasket(basket_address)}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor">
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-    </li>
+      </td>
+      <td>
+        <button
+          className="btn btn-sm btn-error"
+          onClick={handleDeleteBasket(basket_address)}>
+          delete
+        </button>
+      </td>
+    </tr>
   ));
 }
 
 const Home = ({ baskets, setBaskets, createBasket }) => {
+  const maybeBasketList = () => {
+    if (baskets.length === 0) return null;
+
+    return (
+      <>
+        <table className="table table-lg">
+          <thead>
+            <tr>
+              <th colSpan='2' className="text-xl">Baskets</th>
+            </tr>
+          </thead>
+          <tbody>
+            {allBaskets(baskets, setBaskets)}
+          </tbody>
+        </table>
+      </>
+    )
+  }
+  
   const handleCreateBasket = (event) => {
     event.preventDefault();
     createBasket();
   }
-
+  
   return (
-    <>
-      <button onClick={handleCreateBasket}>create basket</button>
-      <h2>Baskets</h2>
-      <ul>
-        {allBaskets(baskets, setBaskets)}
-      </ul>
-    </>
+    <div className="p-5">
+      <button onClick={handleCreateBasket} className="btn btn-secondary">create basket</button>
+      {maybeBasketList()}
+    </div>
   );
 }
 
