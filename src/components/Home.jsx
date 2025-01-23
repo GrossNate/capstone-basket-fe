@@ -38,7 +38,7 @@ const allBaskets = (baskets, setBaskets) => {
   ));
 }
 
-const Home = ({ baskets, setBaskets }) => {
+const Home = ({ baskets, setBaskets, createBasket }) => {
   const maybeBasketList = () => {
     if (baskets.length === 0) return null;
 
@@ -58,9 +58,14 @@ const Home = ({ baskets, setBaskets }) => {
     )
   }
   
+  const handleCreateBasket = (event) => {
+    event.preventDefault();
+    createBasket();
+  }
+  
   return (
     <div className="p-5">
-      <button className="btn btn-secondary">create basket</button>
+      <button onClick={handleCreateBasket} className="btn btn-secondary">create basket</button>
       {maybeBasketList()}
     </div>
   );

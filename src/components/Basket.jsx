@@ -8,11 +8,17 @@ const Basket = () => {
   const { basket_address } = useParams();
 
   useEffect(() => {
-    basketService.getBasketContents(basket_address)
-      .then((basketData) => {
-        setBasketRequests(basketData);
-      })
-      .catch((error) => console.error(error));
+    const refreshBasket = () => {
+      basketService.getBasketContents(basket_address)
+        .then((basketData) => {
+          setBasketRequests(basketData);
+        })
+        .catch((error) => console.error(error));
+    };
+
+    refreshBasket();
+    const refreshInterval = setInterval(() => refreshBasket(), 5000);
+    return () => clearInterval(refreshInterval);
   }, [basket_address]);
 
   return (
@@ -21,12 +27,12 @@ const Basket = () => {
       <ol>
         {basketRequests.map((request) => (
           <li key={request.timestamp} className="py-4 flex">
-            <Request request={request}/>
+            <Request request={request} />
           </li>
         ))}
       </ol>
     </div>
   );
-} 
+}
 
 export default Basket;
